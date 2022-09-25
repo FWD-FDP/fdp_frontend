@@ -8,10 +8,10 @@ module.exports = {
         }
     },
     navigations: {
-        'fdp_frontend.main': '/fdp_frontend'
+        'fdp.main': '/fdp'
     },
     features: {
-        'fdp_frontend': {
+        'fdp': {
             // add your features here in the format [featureName]: { value: string }
         },
     },
