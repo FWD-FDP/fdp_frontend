@@ -1,0 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Readex+Pro:wght@400,500,600,700;400&display=swap");
+
+body,
+html {
+  font-family: "Readex Pro", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
