@@ -1,7 +1,7 @@
 import React from "react";
 import bg from "../../assets/images/header_bg.png";
 
-function HeaderLayout(props) {
+function Header(props) {
   return (
     <div
       className={"header-content"}
@@ -14,4 +14,4 @@ function HeaderLayout(props) {
   );
 }
 
-export default HeaderLayout;
+export default Header;
