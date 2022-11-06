@@ -6,7 +6,7 @@ function FeedCard({
 }) {
   return (
     <div
-      className={"position-relative rounded overflow-hidden"}
+      className={"feed-card position-relative rounded overflow-hidden"}
       style={{
         background: `url(${imageUrl})`,
         backgroundRepeat: "no-repeat",
@@ -16,7 +16,9 @@ function FeedCard({
       }}
     >
       <div
-        className={"text-white p-3 bottom-0 position-absolute w-100"}
+        className={
+          "feed-card-content text-white p-3 bottom-0 position-absolute w-100"
+        }
         style={{
           backgroundColor: "rgba(18,33,39,0.74)",
         }}

@@ -1,20 +1,34 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
 
-function Navbar() {
+function Navbar({ links = [] }) {
   return (
     <div className="container">
       <nav className="navbar navbar-expand text-white">
-        <div className="me-auto">FDP</div>
+        <div className="me-auto">
+          <span className="d-flex align-items-center">
+            <img src={logo} height={20} className={"me-2"} />
+            <Link to="/" className="brand-name me-auto">
+              FDP
+            </Link>
+          </span>
+        </div>
+
         <ul className="navbar-nav">
-          <li className="nav-link">
-            <a href="/home">HOME</a>
-          </li>
-          <li className="nav-link">
-            <a href="/home">SEARCH</a>
-          </li>
-          <li className="nav-link">
-            <a href="/home">CONTACTS</a>
-          </li>
+          {links.length > 0 &&
+            links.map((link, key) => (
+              <li className="nav-link" key={key}>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "navlink isActive" : "navlink"
+                  }
+                  to={link.url}
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
         </ul>
       </nav>
     </div>
