@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import SearchResults from "./searchResults";
-import StockProfile from "./StockProfile";
+import StockProfile from "./stockProfile";
 
 function Search() {
   return (
