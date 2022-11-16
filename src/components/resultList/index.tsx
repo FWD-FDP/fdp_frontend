@@ -4,32 +4,30 @@ import { useNavigate } from "react-router-dom";
 function ResultList({ list = [] }) {
   const navigate = useNavigate();
 
-  if (list.length > 0) {
-    return (
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Symbol</th>
-            <th scope="col">Price</th>
+  return (
+    <table className="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        {list.map((stock) => (
+          <tr
+            key={stock.id}
+            className={"cursor-pointer"}
+            onClick={() => navigate(`./${stock.id}`)}
+          >
+            <td>{stock.displaySymbol}</td>
+            <td>{stock.description}</td>
+            <td>{stock.type}</td>
           </tr>
-        </thead>
-        <tbody>
-          {list.map((stock) => (
-            <tr
-              key={stock.id}
-              className={"cursor-pointer"}
-              onClick={() => navigate(`./${stock.id}`)}
-            >
-              <td>{stock.name}</td>
-              <td>{stock.symbol}</td>
-              <td>{stock.price}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  }
+        ))}
+      </tbody>
+    </table>
+  );
 }
 
 export default ResultList;
