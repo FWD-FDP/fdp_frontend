@@ -10,7 +10,7 @@ function FeedList({ list = [] }) {
             className="col-12 col-md-6 col-lg-3 mb-3 user-select-pointer"
             key={feed.id}
           >
-            <FeedCard imageUrl={feed.image} description={feed.description} />
+            <FeedCard imageUrl={feed.image} description={feed.headline} />
           </div>
         ))}
       </div>

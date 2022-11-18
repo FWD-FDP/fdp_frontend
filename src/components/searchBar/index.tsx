@@ -1,25 +1,17 @@
 import React, { useState } from "react";
 import { Input } from "antd";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SearchBar({ placeholder = "" }) {
   // states
   const [val, setVal] = useState("");
 
   // url location
-  const { search } = useLocation();
   const navigate = useNavigate();
 
   // handle
   const handleSearch = (value) => {
-    if (search) {
-      // if on user in on seach-page
-      // the call api here
-      alert("api call");
-    } else {
-      //redirect to seact-page and forward values as search-params
-      navigate(`search?stock=${value}`);
-    }
+    navigate(`search?stock=${value}`);
   };
 
   return (
