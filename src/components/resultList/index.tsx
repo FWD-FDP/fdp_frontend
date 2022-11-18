@@ -18,7 +18,7 @@ function ResultList({ list = [] }) {
           <tr
             key={stock.id}
             className={"cursor-pointer"}
-            onClick={() => navigate(`./${stock.id}`)}
+            onClick={() => navigate(`./${stock.symbol}`)}
           >
             <td>{stock.displaySymbol}</td>
             <td>{stock.description}</td>

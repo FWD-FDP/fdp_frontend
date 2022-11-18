@@ -12,7 +12,7 @@ function FeedCard({
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         width: "100%",
-        height: 325,
+        height: "100%",
       }}
     >
       <div

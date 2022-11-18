@@ -1,18 +1,9 @@
 import React, { Component } from "react";
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import queryString from 'query-string';
 import SearchList from "../../components/resultList";
 import { finnhubClient } from "../../api/finnhub/client";
+import { withRouter } from "../../utils";
 
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return <Component {...props} {...{location, navigate, params}} />;
-  }
-
-  return ComponentWithRouterProp;
-}
 
 class SearchResults extends Component {
   state = {
@@ -24,11 +15,13 @@ class SearchResults extends Component {
   }
 
   getSymbolSearch(): void {
-    // const location = useLocation();
-    const search = this.props.location.search;
-    const symbol = search.replace('?stock=', '');
+    const params = queryString.parse(this.props.location.search);
+  
+    if (!params.stock) {
+      return;
+    }
 
-    finnhubClient.symbolSearch(symbol, (e, symbolSearch, r) => {
+    finnhubClient.symbolSearch(params.stock, (e, symbolSearch, r) => {
       if (!e && symbolSearch) {
         console.log(symbolSearch)
         this.setState({
@@ -40,6 +33,14 @@ class SearchResults extends Component {
 
   componentDidMount(): void {
     this.getSymbolSearch();
+  }
+
+  componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>, snapshot?: any): void {
+    const prevParams = queryString.parse(prevProps.location.search);
+    const params = queryString.parse(this.props.location.search);
+    if (params.stock !== prevParams.stock) {
+      this.getSymbolSearch();
+    }
   }
 
   render() {

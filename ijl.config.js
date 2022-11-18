@@ -16,6 +16,6 @@ module.exports = {
         },
     },
     config: {
-        key: 'value'
+        apiKey: ''
     }
 }
