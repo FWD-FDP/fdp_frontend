@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import queryString from 'query-string';
+import queryString from "query-string";
 import SearchList from "../../components/resultList";
+import Loader from "../../components/loader";
 import { finnhubClient } from "../../api/finnhub/client";
 import { withRouter } from "../../utils";
-
 
 class SearchResults extends Component {
   state = {
     data: [],
-  }
+    isLoading: false,
+  };
 
   constructor(props) {
     super(props);
@@ -16,18 +17,19 @@ class SearchResults extends Component {
 
   getSymbolSearch(): void {
     const params = queryString.parse(this.props.location.search);
-  
+
     if (!params.stock) {
       return;
     }
-
+    this.setState({ isLoading: true });
     finnhubClient.symbolSearch(params.stock, (e, symbolSearch, r) => {
       if (!e && symbolSearch) {
-        console.log(symbolSearch)
+        console.log(symbolSearch);
         this.setState({
-          data: symbolSearch.result
+          data: symbolSearch.result,
+          isLoading: false,
         });
-      };
+      }
     });
   }
 
@@ -35,7 +37,11 @@ class SearchResults extends Component {
     this.getSymbolSearch();
   }
 
-  componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>, snapshot?: any): void {
+  componentDidUpdate(
+    prevProps: Readonly<{}>,
+    prevState: Readonly<{}>,
+    snapshot?: any
+  ): void {
     const prevParams = queryString.parse(prevProps.location.search);
     const params = queryString.parse(this.props.location.search);
     if (params.stock !== prevParams.stock) {
@@ -47,11 +53,11 @@ class SearchResults extends Component {
     return (
       <section id="search-results" className="col-12 col-md-8 mx-auto">
         <h3 className="mb-4">Stocks Found</h3>
-        <SearchList list={this.state.data} />
+        {!this.state.isLoading && <SearchList list={this.state.data} />}
+        {this.state.isLoading && <Loader />}
       </section>
     );
   }
-
 }
 
 export default withRouter(SearchResults);
